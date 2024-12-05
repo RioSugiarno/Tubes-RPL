@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAP</title>
+  <link rel="stylesheet" href="bap-css.css">
+</head>
+<body>    
+   <a href="/Pembimbing/homescreen.html" class="back-button">←</a>
+   
+   <!-- Content -->
+   <div class="container">
+       <div class="header">
+         <h1>BAP</h1>
+       </div>
+    <!-- Pilih NPM -->
+    <div class="section">
+      <label for="npm-dropdown">Pilih NPM Mahasiswa</label>
+      <select id="npm-dropdown">
+        <option value="">List NPM Mahasiswa</option>
+        <option value="1">6182201034 - Jayden</option>
+        <option value="2">6182201043 - Rio</option>
+        <option value="3">6182201052 - Hepi</option>
+      </select>
+    </div>
+
+    <!-- Download BAP -->
+    <div class="section">
+      <label>Download BAP</label>
+      <button class="action-btn" onclick="showDownloadModal()">Download</button>
+    </div>
+
+    <!-- Upload BAP -->
+    <div class="section">
+      <label>Upload BAP</label>
+      <p class="note">*yang sudah terverifikasi</p>
+      <div class="upload-container">
+        <input type="file" id="upload-file" class="upload-input">
+        <button class="action-btn" onclick="confirmUpload()">Upload</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+      <img src="/Pembimbing/assets/BAPimage.png" alt="BAP Preview" class="bap-preview">
+      <div class="modal-buttons">
+        <!-- Tombol Download -->
+        <a href="/Pembimbing/assets/BAPimage.png" download="BAPimage.png" class="action-btn">Download</a>
+        <button class="action-btn" onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Notification -->
+  <div id="notification" class="notification"></div>
+
+  <!-- JavaScript -->
+  <script src="bap.js"></script>
+</body>
+</html>
