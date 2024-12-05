@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penilaian Tugas Akhir</title>
+    <link rel="stylesheet" href="input-nilai-sidang-css.css">
+</head>
+<body>
+    <a href="/Penguji/homescreen.html" class="back-button">←</a>
+    <div class="container">
+        <div class="header">
+            <h1>Penilaian Tugas Akhir</h1>
+        </div>
+        <form id="penilaianForm">
+            <div class="form-group">
+                <label for="npm">Pilih NPM Mahasiswa</label>
+                <select id="npm">
+                    <option value="" disabled selected>List NPM Mahasiswa</option>
+                    <option value="6182201034">6182201034 - Jayden</option>
+                    <option value="6182201043">6182201043 - Rio</option>
+                    <option value="6182201052">6182201052 - Hepi</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="presentasi">Presentasi</label>
+                <input type="number" id="presentasi" placeholder="Input Angka Nilai">
+            </div>
+            <div class="form-group">
+                <label for="tataTulis">Tata Tulis Laporan</label>
+                <input type="number" id="tataTulis" placeholder="Input Angka Nilai">
+            </div>
+            <div class="form-group">
+                <label for="kelengkapanMateri">Kelengkapan Materi</label>
+                <input type="number" id="kelengkapanMateri" placeholder="Input Angka Nilai">
+            </div>
+            <div class="form-group">
+                <label for="prosesBimbingan">Pencapaian Tujuan</label>
+                <input type="number" id="prosesBimbingan" placeholder="Input Angka Nilai">
+            </div>
+            <div class="form-group">
+                <label for="penguasaanMateri">Penguasaan Materi</label>
+                <input type="number" id="penguasaanMateri" placeholder="Input Angka Nilai">
+            </div>
+            <div id="estimasiNilai">
+                <strong>Estimasi Nilai:</strong> <span id="totalNilai">0</span>
+            </div>
+            <button type="button" onclick="validateAndSubmit()">Submit</button>
+        </form>
+        <div id="popup" class="popup">
+            <h3>Are you sure you want to Submit?</h3>
+            <button onclick="closePopup()">Cancel</button>
+            <button onclick="submitForm()">Submit</button>
+        </div>
+        <div id="submittedMessage" class="submitted-message">
+            <p>Submitted 👍</p>
+        </div>
+    </div>
+    <script src="input-nilai-sidang.js" defer></script>
+</body>
+</html>
