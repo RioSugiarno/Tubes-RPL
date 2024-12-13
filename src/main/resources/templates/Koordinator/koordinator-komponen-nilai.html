@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komponen Nilai</title>
+    <link rel="stylesheet" href="/css/koordinator/koordinator-komponen-nilai-css.css">
+</head>
+<body>
+    <a href="/koordinator/homescreen" class="back-button">←</a>
+    <div class="container">
+        <div class="header">
+            <h1>Komponen Nilai</h1>
+            <div class="form-group">
+                <label for="tahun-semester">Tahun Semester</label>
+                <select id="tahun-semester" name="tahun-semester">
+                    <option value="">Pilih Tahun Semester</option>
+                    <option value="GANJIL 2022/2023">GANJIL 2022/2023</option>
+                    <option value="GENAP 2022/2023">GENAP 2022/2023</option>
+                    <option value="GANJIL 2023/2024">GANJIL 2023/2024</option>
+                    <option value="GENAP 2023/2024">GENAP 2023/2024</option>
+                </select>
+            </div>
+        </div>
+        <form id="nilaiForm">
+            <div class="form-section">
+                <h2>Penguji</h2>
+                <div class="form-group">
+                    <label for="penguji-tata">Tata Tulis Laporan</label>
+                    <input type="number" id="penguji-tata" name="penguji-tata" placeholder="Input Persentase Penilaian">
+                </div>
+                <div class="form-group">
+                    <label for="penguji-kelengkapan">Kelengkapan Materi</label>
+                    <input type="number" id="penguji-kelengkapan" name="penguji-kelengkapan" placeholder="Input Persentase Penilaian">
+                </div>
+                <div class="form-group">
+                    <label for="penguji-tujuan">Pencapaian Tujuan</label>
+                    <input type="number" id="penguji-tujuan" name="penguji-tujuan" placeholder="Input Persentase Penilaian">
+                </div>
+                <div class="form-group">
+                    <label for="penguji-materi">Penguasaan Materi</label>
+                    <input type="number" id="penguji-materi" name="penguji-materi" placeholder="Input Persentase Penilaian">
+                </div>
+                <div class="form-group">
+                    <label for="penguji-presentasi">Presentasi</label>
+                    <input type="number" id="penguji-presentasi" name="penguji-presentasi" placeholder="Input Persentase Penilaian">
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="form-section">
+                <h2>Pembimbing</h2>
+                <div class="form-group">
+                    <label for="pembimbing-tata">Tata Tulis Laporan</label>
+                    <input type="number" id="pembimbing-tata" name="pembimbing-tata" placeholder="Input Persentase Penilaian">
+                </div>
+                <div class="form-group">
+                    <label for="pembimbing-kelengkapan">Kelengkapan Materi</label>
+                    <input type="number" id="pembimbing-kelengkapan" name="pembimbing-kelengkapan" placeholder="Input Persentase Penilaian">
+                </div>
+                <div class="form-group">
+                    <label for="pembimbing-proses">Proses Bimbingan</label>
+                    <input type="number" id="pembimbing-proses" name="pembimbing-proses" placeholder="Input Persentase Penilaian">
+                </div>
+                <div class="form-group">
+                    <label for="pembimbing-materi">Penguasaan Materi</label>
+                    <input type="number" id="pembimbing-materi" name="pembimbing-materi" placeholder="Input Persentase Penilaian">
+                </div>
+            </div>
+            <p id="warningMessage" class="warning-message">Total nilai untuk Penguji dan Pembimbing masing-masing harus 100%</p>
+            <button type="button" id="saveButton" onclick="validateAndSave()">Save</button>
+        </form>
+        <div class="popup" id="popup">
+            <h3>Are you sure you want to Save?</h3>
+            <button onclick="submitForm()">Save</button>
+            <button onclick="closePopup()">Cancel</button>
+        </div>
+        <div class="submitted-message" id="submittedMessage">
+            <strong>Saved 👍</strong>
+        </div>
+    </div>
+    <script src="/js/koordinator-komponen-nilai.js" defer></script>
+</body>
+</html>

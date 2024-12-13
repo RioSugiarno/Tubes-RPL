@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catatan Sidang</title>
+    <link rel="stylesheet" href="/css/pembimbing/catatan-sidang-css.css">
+</head>
+<body>
+    <a href="/pembimbing/homescreen" class="back-button">←</a>
+
+    <div class="container">
+        <div class="header">
+            <h1>Catatan Sidang</h1>
+        </div>
+
+    <div class="section">
+        <label for="npm-dropdown">Pilih NPM Mahasiswa</label>
+        <select id="npm-dropdown">
+            <option>List NPM Mahasiswa</option>
+            <option th:each="mahasiswa : ${pair}" th:value="${mahasiswa.getNpm()}" th:text="${mahasiswa.getNpm()} + ' - ' + ${mahasiswa.getNama()}"></option>
+        </select>
+    </div>
+
+    <!-- Catatan Sidang -->
+    <div class="section">
+        <label for="sidang-notes">Catatan Sidang Tugas Akhir</label>
+        <textarea id="sidang-notes" placeholder="Input Catatan Untuk Mahasiswa..."></textarea>
+    </div>
+
+    <!-- Submit Button -->
+        <button class="action-btn" onclick="submitNotes()">Submit</button>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <!-- JavaScript -->
+    <script src="/js/pembimbing/catatan-ta.js" defer></script>
+</body>
+</html>
