@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Input Nilai Sidang</title>
-    <link rel="stylesheet" href="/css/penguji/input-nilai-sidang-css.css">
+    <link rel="stylesheet" th:href="@{/css/penguji/input-nilai-sidang-css.css}">
 </head>
 <body>
     <a th:href="@{/penguji/homescreen}" class="back-button">←</a>
@@ -12,12 +12,14 @@
         <div class="header">
             <h1>Penilaian Tugas Akhir</h1>
         </div>
-        <form id="penilaianForm" action="#" th:action="@{/penguji/input-nilai-sidang}" method="post">
+        <form id="penilaianForm" th:action="@{/penguji/input-nilai-sidang}" method="post">
             <div class="form-group">
                 <label for="npm">Pilih NPM Mahasiswa</label>
                 <select id="npm" name="npm" required>
                     <option value="" disabled selected>List NPM Mahasiswa</option>
-                    <option th:each="mahasiswa : ${pair}" th:value="${mahasiswa.getNpm()}" th:text="${mahasiswa.getNpm()} + ' - ' + ${mahasiswa.getNama()}"></option>
+                    <option th:each="mahasiswa : ${pair}" 
+                            th:value="${mahasiswa.getNpm()}" 
+                            th:text="${mahasiswa.getNpm()} + ' - ' + ${mahasiswa.getNama()}"></option>
                 </select>
             </div>
             <div class="form-group">
@@ -33,7 +35,7 @@
                 <input type="number" id="kelengkapanMateri" name="kelengkapanMateri" data-komponen-id="3" placeholder="Input Angka Nilai" required>
             </div>
             <div class="form-group">
-                <label for="prosesBimbingan">Pencapaian Tujuan</label>
+                <label for="pencapaianTujuan">Pencapaian Tujuan</label>
                 <input type="number" id="pencapaianTujuan" name="pencapaianTujuan" data-komponen-id="4" placeholder="Input Angka Nilai" required>
             </div>
             <div class="form-group">

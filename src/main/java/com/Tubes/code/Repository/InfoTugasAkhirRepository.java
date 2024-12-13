@@ -20,6 +20,7 @@ public interface InfoTugasAkhirRepository {
     List<Map<String, Object>> findSidangByPengujiWithNames(String nidPenguji);
     List<Map<String, Object>> findSidangByPembimbingWithNames(String nidPembimbing);
 
+
     // Input nilai sidang penguji
     int findIdTaByNpm(String npm); // Hapus tubuh method
     int findIdKomponenNilaiByDeskripsi(String deskripsi); // Hapus tubuh method

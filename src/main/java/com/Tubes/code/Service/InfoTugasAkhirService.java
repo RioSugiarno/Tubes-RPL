@@ -55,6 +55,7 @@ public class InfoTugasAkhirService {
     //     return infoTugasAkhirRepository.findSidangByPenguji(nidPenguji);
     // }
 
+
     //penguji
     public List<Map<String, Object>> getSidangByPengujiWithNames(String nidPenguji) {
         return infoTugasAkhirRepository.findSidangByPengujiWithNames(nidPenguji);
@@ -64,7 +65,6 @@ public class InfoTugasAkhirService {
     public List<Map<String, Object>> getSidangByPembimbingWithNames(String nidPembimbing) {
         return infoTugasAkhirRepository.findSidangByPembimbingWithNames(nidPembimbing);
     }
-
 
     public int findIdTaByNpm(String npm) {
         return infoTugasAkhirRepository.findIdTaByNpm(npm);
@@ -83,11 +83,7 @@ public class InfoTugasAkhirService {
             throw new IllegalArgumentException("Data sidang tidak ditemukan untuk NPM: " + npm);
         }
     }
-    
-    // public InfoTugasAkhir findByNpm(String npm) {
-    //     return infoTugasAkhirRepository.findByNpm(npm);
-    // }    
-    
+       
     public InfoTugasAkhir findByNpm(String npm) {
         InfoTugasAkhir infoTugasAkhir = infoTugasAkhirRepository.findByNpm(npm);
         if (infoTugasAkhir == null) {
@@ -95,5 +91,4 @@ public class InfoTugasAkhirService {
         }
         return infoTugasAkhir;
     }
-    
 }

@@ -72,10 +72,10 @@ public class LoginController {
                     return "login";
                 }
                 session.setAttribute("loggedInUser", nid); // Simpan NID di session
+
             } else {
                 session.setAttribute("loggedInUser", user.getNamaLengkap()); // Simpan nama lengkap untuk role lain
             }
-            
             
             return switch (user.getRole()) {
                 case "Mahasiswa" -> "redirect:/mahasiswa/homescreen";

@@ -9,7 +9,6 @@ import com.Tubes.code.Service.PenilaianDetailService;
 import jakarta.servlet.http.HttpSession;
 import com.Tubes.code.Entity.PenilaianDetail;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -117,12 +115,11 @@ public class PengujiController {
         return response;
     }
 
-    
     // Penguji = list drop down mahasiswa di bap
     @GetMapping("/bap")
     public String getBap(Model model, HttpSession session) {
         Optional<List<NpmMahasiswaPair>> pair = infoTugasAkhirService.findPair();
-        if (pair.isPresent()&&!pair.get().isEmpty()) {
+        if (pair.isPresent() && !pair.get().isEmpty()) {
             model.addAttribute("pair", pair.get());
         }
         return "penguji/bap";
@@ -130,7 +127,7 @@ public class PengujiController {
 
     @PostMapping("/bap")
     public String inputBAP(Model model, HttpSession session) {
-
+        // Implement the logic for BAP input here
         return "";
     }
 }

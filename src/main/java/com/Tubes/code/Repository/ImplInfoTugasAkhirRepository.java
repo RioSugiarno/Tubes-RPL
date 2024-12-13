@@ -96,7 +96,6 @@ public class ImplInfoTugasAkhirRepository implements InfoTugasAkhirRepository{
         return jdbcTemplate.queryForList(query, nidPembimbing, nidPembimbing);
     }
 
-
     private InfoTugasAkhir mapRowToInfoTugasAkhir(ResultSet rs, int rowNum) throws SQLException {
         return new InfoTugasAkhir(
                 rs.getInt("id_ta"),
