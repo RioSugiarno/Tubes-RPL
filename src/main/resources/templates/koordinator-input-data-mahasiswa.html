@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Data Mahasiswa</title>
+    <link rel="stylesheet" href="/css/koordinator-input-data-mahasiswa-css.css">
+</head>
+<body>
+    <a href="/koordinator/homescreen" class="back-button">←</a>
+    <div class="container">
+        <div class="header">
+            <h1>Input Data Mahasiswa</h1>
+        </div>
+        <form id="mahasiswaForm" action="/koordinator/input-data-mahasiswa" method="post">
+            <div class="form-group">
+                <label for="nama">Nama</label>
+                <input type="text" id="nama" name="nama" placeholder="Input Nama Mahasiswa" required>
+            </div>
+            <div class="form-group">
+                <label for="npm">NPM</label>
+                <input type="text" id="npm" name="npm" placeholder="Input NPM Mahasiswa" required>
+            </div>
+            <div class="form-group">
+                <label for="judul">Judul Skripsi</label>
+                <input type="text" id="judul" name="judul" placeholder="Input Judul Skripsi" required>
+            </div>
+            <div class="form-group">
+                <label for="jenis">Jenis TA</label>
+                <input type="text" id="jenis" name="jenis" placeholder="Input Jenis TA" required>
+            </div>
+            <div class="form-group">
+                <label for="pembimbing1">Pembimbing 1</label>
+                <input type="text" id="pembimbing1" name="pembimbing1" placeholder="Input Nama Pembimbing 1" required>
+            </div>
+            <div class="form-group">
+                <label for="pembimbing2">Pembimbing 2</label>
+                <input type="text" id="pembimbing2" name="pembimbing2" placeholder="Input Nama Pembimbing 2" required>
+            </div>
+            <button id="popup-button" onclick="showPopup()">Submit</button>
+            <p id="error-message" class="error-message" th:text="${error}"></p>
+            <div class="popup" id="popup">
+                <h3>Are you sure you want to Submit?</h3>
+                <button type="button" onclick="submitForm()">Submit</button>
+                <button onclick="closePopup()">Cancel</button>
+            </div>
+            <div class="submitted-message" id="submittedMessage">
+                <strong>Submitted 👍</strong>
+            </div>
+        </form>
+
+    </div>
+    <script src="/js/koordinator-input-data-mahasiswa.js" defer></script>
+</body>
+</html>
