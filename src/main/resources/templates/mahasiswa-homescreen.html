@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Screen</title>
+    <link rel="stylesheet" href="/css/mahasiswa-homescreen-css.css">
+</head>
+<body>
+    <div class="background">
+
+    </div>
+
+    <!-- Back button -->
+    <a href="/logout" class="back-button">←</a>
+
+    <div class="homescreen-container">
+        <h2 >Selamat Datang, <br><sp th:text="${mahasiswa}"></sp>!</h2>
+        <div class="button-group">
+            <a href="../MAHASISWA/informasi-sidangta/informasi-sidang.html">
+                <button>Informasi Sidang</button>
+            </a>
+            <a href="../MAHASISWA/nilai-ta/nilai.html">
+                <button>Nilai TA</button>
+            </a>
+            <a href="mahasiswa-catatan-ta.html">
+                <button>Catatan TA</button>
+            </a>
+            <a href="../MAHASISWA/bap/bap.html" >
+                <button>BAP</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

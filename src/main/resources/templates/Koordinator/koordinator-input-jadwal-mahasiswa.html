@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Jadwal Sidang Mahasiswa</title>
+    <link rel="stylesheet" href="/css/koordinator/koordinator-input-jadwal-mahasiswa-css.css">
+</head>
+<body>
+    <a href="/koordinator/homescreen" class="back-button">←</a>
+    <div class="container">
+        <div class="header">
+            <h1>Input Jadwal Sidang</h1>
+        </div>
+        <form id="jadwalForm" action="/koordinator/input-jadwal-mahasiswa" method="POST">
+            <div class="form-group">
+                <label for="npm">NPM</label>
+                <select id="npm" name="npm">
+                    <option value="">List NPM Mahasiswa</option>
+                    <option th:each="mahasiswa : ${pair}" th:value="${mahasiswa.getNpm()}" th:text="${mahasiswa.getNpm()} + ' - ' + ${mahasiswa.getNama()}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="jadwal">Jadwal</label>
+                <input type="date" id="jadwal" name="jadwal">
+            </div>
+            <div class="form-group">
+                <label for="waktu">Waktu</label>
+                <input type="time" id="waktu" name="waktu">
+            </div>
+            <div class="form-group">
+                <label for="tempat">Tempat</label>
+                <input type="text" id="tempat" name="tempat" placeholder="Input Lokasi Tempat">
+            </div>
+            <div class="form-group">
+                <label for="penguji1">Penguji 1</label>
+                <input type="text" id="penguji1" name="penguji1" placeholder="Input Nama Penguji 1">
+            </div>
+            <div class="form-group">
+                <label for="penguji2">Penguji 2</label>
+                <input type="text" id="penguji2" name="penguji2" placeholder="Input Nama Penguji 2">
+            </div>
+            <button id="popup-button" onclick="showPopup()">Submit</button>
+            <p id="error-message" class="error-message" th:text="${error}"></p>
+            <div class="popup" id="popup">
+                <h3>Are you sure you want to Submit?</h3>
+                <button type="button" onclick="submitForm()">Submit</button>
+                <button onclick="closePopup()">Cancel</button>
+            </div>
+            <div class="submitted-message" id="submittedMessage">
+                <strong>Submitted 👍</strong>
+            </div>
+        </form>
+    </div>
+    <script src="/js/koordinator-input-jadwal-mahasiswa.js"></script>
+</body>
+</html>

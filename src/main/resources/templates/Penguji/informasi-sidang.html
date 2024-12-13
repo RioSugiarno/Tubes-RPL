@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasi Sidang</title>
+    <link rel="stylesheet" href="/css/penguji/informasi-sidang-css.css">
+</head>
+<body>
+    <a href="/penguji/homescreen" class="back-button">←</a>
+    <div class="container">
+        <h1>Informasi Sidang</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>NPM</th>
+                    <th>Judul TA</th>
+                    <th>Tanggal/Waktu</th>
+                    <th>Ruangan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr th:each="sidang : ${sidangList}" 
+                    th:data-penguji1="${sidang.nid_penguji1}" 
+                    th:data-penguji2="${sidang.nid_penguji2}" 
+                    th:data-pembimbing1="${sidang.nid_pembimbing1}" 
+                    th:data-pembimbing2="${sidang.nid_pembimbing2}"
+                    onclick="showDetail(this)">
+                    <td th:text="${sidang.npm}"></td>
+                    <td th:text="${sidang.judul}"></td>
+                    <td th:text="${sidang.tanggal} + ' ' + ${sidang.waktu}"></td>
+                    <td th:text="${sidang.tempat}"></td>
+                </tr> -->
+                <tr th:each="sidang : ${sidangList}" 
+                    th:data-nama-penguji1="${sidang['namaPenguji1']}" 
+                    th:data-nama-penguji2="${sidang['namaPenguji2']}" 
+                    th:data-nama-pembimbing1="${sidang['namaPembimbing1']}" 
+                    th:data-nama-pembimbing2="${sidang['namaPembimbing2']}" 
+                    th:data-penguji1="${sidang['nidPenguji1']}" 
+                    th:data-penguji2="${sidang['nidPenguji2']}" 
+                    th:data-pembimbing1="${sidang['nidPembimbing1']}" 
+                    th:data-pembimbing2="${sidang['nidPembimbing2']}" 
+                    th:data-nama-mahasiswa="${sidang['namaMahasiswa']}" 
+                    onclick="showDetail(this)">
+                    <td th:text="${sidang['nim']} + ' - ' + ${sidang['namaMahasiswa']}"></td>
+                    <td th:text="${sidang['judul']}"></td>
+                    <td th:text="${sidang['tanggal']} + ' ' + ${sidang['waktu']}"></td>
+                    <td th:text="${sidang['tempat']}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="popupOverlay" class="popup-overlay" onclick="closePopup()"></div>
+        <div id="popup" class="popup">
+            <h3>Detail Sidang</h3>
+            <div id="detailJadwal" class="detail-content"></div>
+            <button onclick="closePopup()">Tutup</button>
+        </div>
+
+        <script th:src="@{/js/penguji/informasi-sidang.js}" defer></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Nilai Sidang</title>
+    <link rel="stylesheet" href="/css/penguji/input-nilai-sidang-css.css">
+</head>
+<body>
+    <a th:href="@{/penguji/homescreen}" class="back-button">←</a>
+    <div class="container">
+        <div class="header">
+            <h1>Penilaian Tugas Akhir</h1>
+        </div>
+        <form id="penilaianForm" action="#" th:action="@{/penguji/input-nilai-sidang}" method="post">
+            <div class="form-group">
+                <label for="npm">Pilih NPM Mahasiswa</label>
+                <select id="npm" name="npm" required>
+                    <option value="" disabled selected>List NPM Mahasiswa</option>
+                    <option th:each="mahasiswa : ${pair}" th:value="${mahasiswa.getNpm()}" th:text="${mahasiswa.getNpm()} + ' - ' + ${mahasiswa.getNama()}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="presentasi">Presentasi</label>
+                <input type="number" id="presentasi" name="presentasi" data-komponen-id="1" placeholder="Input Angka Nilai" required>
+            </div>
+            <div class="form-group">
+                <label for="tataTulis">Tata Tulis Laporan</label>
+                <input type="number" id="tataTulis" name="tataTulis" data-komponen-id="2" placeholder="Input Angka Nilai" required>
+            </div>
+            <div class="form-group">
+                <label for="kelengkapanMateri">Kelengkapan Materi</label>
+                <input type="number" id="kelengkapanMateri" name="kelengkapanMateri" data-komponen-id="3" placeholder="Input Angka Nilai" required>
+            </div>
+            <div class="form-group">
+                <label for="prosesBimbingan">Pencapaian Tujuan</label>
+                <input type="number" id="pencapaianTujuan" name="pencapaianTujuan" data-komponen-id="4" placeholder="Input Angka Nilai" required>
+            </div>
+            <div class="form-group">
+                <label for="penguasaanMateri">Penguasaan Materi</label>
+                <input type="number" id="penguasaanMateri" name="penguasaanMateri" data-komponen-id="5" placeholder="Input Angka Nilai" required>
+            </div>
+            <div id="estimasiNilai">
+                <strong>Estimasi Nilai:</strong> <span id="totalNilai">0</span>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="popup" class="popup">
+            <h3>Are you sure you want to Submit?</h3>
+            <button onclick="closePopup()">Cancel</button>
+            <button onclick="submitForm()">Submit</button>
+        </div>
+        <div id="submittedMessage" class="submitted-message">
+            <p>Submitted 👍</p>
+        </div>
+    </div>
+    <script th:src="@{/js/penguji/input-nilai-sidang.js}" defer></script>
+</body>
+</html>
