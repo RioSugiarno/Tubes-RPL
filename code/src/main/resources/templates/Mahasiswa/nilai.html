@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nilai Total Mahasiswa</title>
+    <link rel="stylesheet" href="/css/mahasiswa/nilai-css.css">
+    <script src="/js/mahasiswa/nilai.js" defer></script>
+</head>
+<body>
+    <a class="back-button" href="/mahasiswa/homescreen">←</a>
+    
+    <div class="container mt-4">
+        <!-- Menampilkan nilai total mahasiswa -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h3>Nilai Total</h3>
+            </div>
+            <div class="card-body">
+                <h4 th:text="${totalScore}" class="card-title">Total Score</h4>
+            </div>
+        </div>
+    
+        <!-- Tombol untuk membuka pop-up -->
+        <button id="detailButton" class="btn btn-primary">Detail Penilaian</button>
+
+    <div id="detailPopup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <span id="closePopup" class="close">&times;</span>
+            <h3>Detail Penilaian</h3>
+            <div th:each="entry : ${groupedDetails}">
+                <!-- Nama Penilai -->
+                <h4 th:text="'Penilai: ' + ${entry.key}"></h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nama Komponen</th>
+                            <th>Nilai</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="komponenEntry : ${entry.value}">
+                            <td th:text="${komponenEntry.key}"></td> <!-- Nama Komponen -->
+                            <td th:text="${komponenEntry.value}"></td> <!-- Nilai Angka -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>  
+
+    <!-- Pesan jika tidak ada nilai -->
+    <div th:if="${totalScore == 'Nilai Total belum Tersedia!'}">
+        <div class="alert alert-warning" role="alert">
+            Belum ada Pembimbing atau Penguji yang memberi Nilai!
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="/css/login-css.css">
+</head>
+<body>
+    <div class="background">
+        <img src="/assets/background.jpg" alt="">
+    </div>
+    <div class="login-container">
+        <div class="logo-unpar">
+            <img src="/assets/logo-unpar.png" alt="">
+        </div>
+        <h2>Welcome to SidApp</h2>
+        <form id="loginForm" action="/login" method="post">
+            <div class="input-group">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Login</button>
+            <p id="error-message" class="error-message" th:text="${error}"></p>
+        </form>
+    </div>
+
+<!--    <script src="login-script.js"></script>-->
+</body>
+</html>

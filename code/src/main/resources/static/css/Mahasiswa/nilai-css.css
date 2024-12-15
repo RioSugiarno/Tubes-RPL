@@ -1,0 +1,140 @@
+/* Global Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #E0FBE2;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Container Styling */
+.container {
+    background-color: #fff;
+    width: 100%;
+    max-width: 1000px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid black;
+    position: relative;
+}
+
+/* Header Styling */
+.card-header {
+    background-color: lightgray;
+    color: black;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+th {
+    background-color: lightgray;
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Styling Total Score */
+.card-body .card-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+
+/* Back Button */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-button:hover {
+    color: #45a049; /* Warna hover */
+}
+
+/* Pop-up Styling */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80%;
+    overflow-y: auto; /* Tambahkan scrollbar jika konten berlebih */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Tombol Detail Penilaian */
+.btn-primary {
+    display: block;
+    margin: 20px auto;
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background-color: #45a049;
+}
