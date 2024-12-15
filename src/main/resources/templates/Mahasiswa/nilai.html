@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penilaian Tugas Akhir</title>
+    <link rel="stylesheet" href="/css/mahasiswa/nilai.css">
+</head>
+<body>
+    <a href="/mahasiswa/homescreen" class="back-button">←</a>
+    <div class="container">
+        <div class="header">
+            <h1>Informasi Nilai TA</h1>
+        </div>
+
+        <!-- Tabel dengan Struktur Sesuai Gambar -->
+        <table class="sidang-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Pembimbing/Penguji</th>
+                    <th>Nilai</th>
+                    <th>Bobot</th>
+                    <th>Nilai Akhir</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Ketua tim penguji</td>
+                    <td>72.40</td>
+                    <td>35.00%</td>
+                    <td>25.34</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Anggota penguji</td>
+                    <td>71.70</td>
+                    <td>35.00%</td>
+                    <td>25.09</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Pembimbing</td>
+                    <td>78.90</td>
+                    <td>20.00%</td>
+                    <td>15.78</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Koordinator skripsi</td>
+                    <td>100.00</td>
+                    <td>10.00%</td>
+                    <td>10.00</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>Total</td>
+                    <td>-</td>
+                    <td>100.00%</td>
+                    <td>76.21</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="nilai.js" defer></script>
+</body>
+</html>

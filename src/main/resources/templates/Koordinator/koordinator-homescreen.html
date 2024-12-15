@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Screen</title>
+    <link rel="stylesheet" href="/css/koordinator-homescreen-css.css">
+    <style>
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('/assets/background.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+
+    </div>
+
+    <!-- Back button -->
+    <a href="/logout" class="back-button">←</a>
+
+    <div class="homescreen-container">
+        <h2>Selamat Datang,<br><span th:text="${koordinator}"></span> <br>Koordinator !</h2>
+        <div class="button-group">
+            <a href="/koordinator/input-data-mahasiswa">
+                <button>Input Data Mahasiswa</button>
+            </a>
+
+            <a href="/koordinator/input-jadwal-sidang-mahasiswa">
+                <button>Input Jadwal Sidang Mahasiswa</button>
+            </a>
+            <a href="/koordinator/bap">
+                <button>BAP</button>
+            </a>
+
+            <a href="/koordinator/komponen-nilai">
+                <button>Komponen Nilai</button>
+            </a>
+
+        </div>
+    </div>
+</body>
+</html>

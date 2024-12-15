@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAP</title>
+  <link rel="stylesheet" href="/css/pembimbing/bap-css.css">
+</head>
+<body>
+  <a href="/pembimbing/homescreen" class="back-button">←</a>
+
+  <!-- Content -->
+  <div class="container">
+    <div class="header">
+      <h1>BAP</h1>
+    </div>
+
+    <!-- Pilih NPM
+    <div class="section">
+      <label for="npm-dropdown">Pilih NPM Mahasiswa</label>
+      <select id="npm-dropdown">
+        <option>List NPM Mahasiswa</option>
+        <option th:each="mahasiswa : ${pair}" th:value="${mahasiswa.getNpm()}" th:text="${mahasiswa.getNpm()} + ' - ' + ${mahasiswa.getNama()}"></option>
+      </select>
+    </div> -->
+
+    <div class="section">
+      <label for="npm-dropdown">Pilih NPM Mahasiswa</label>
+      <select id="npm-dropdown">
+          <option>List NPM Mahasiswa</option>
+          <option th:each="mahasiswa : ${pair}" th:value="${mahasiswa.getNpm()}" th:text="${mahasiswa.getNpm()} + ' - ' + ${mahasiswa.getNama()}"></option>
+        </select>
+    </div>
+
+    <!-- Download BAP -->
+    <div class="section">
+      <label>Download BAP</label>
+      <button class="action-btn" onclick="showDownloadModal()">Download</button>
+    </div>
+
+    <!-- Upload BAP -->
+    <!-- <div class="section">
+      <label>Upload BAP</label>
+      <p class="note">*yang sudah terverifikasi</p>
+      <div class="upload-container">
+        <input type="file" id="upload-file" class="upload-input">
+        <button class="action-btn" onclick="confirmUpload()">Upload</button>
+      </div>
+    </div>
+
+    <div id="status-message" class="status-message"></div>
+  </div> -->
+
+  <!-- <input type="hidden" id="current-user-id" th:value="${currentUserId}"> -->
+
+  <!-- Upload BAP -->
+  <div class="section">
+    <label>Upload BAP</label>
+    <p class="note">*yang sudah terverifikasi</p>
+    <div class="upload-container">
+      <input type="file" id="upload-file" class="upload-input">
+      <button class="action-btn" onclick="confirmUpload()">Upload</button>
+    </div>
+  </div>
+
+  <div class="status-section" th:if="${bapStatus != null}">
+    <h2>Status Verifikasi BAP</h2>
+    <ul>
+      <li>
+        Penguji:
+        <span th:text="${bapStatus['statusPenguji'] == true ? 'Penguji telah memverifikasi BAP!' : 'Penguji belum memverifikasi BAP!'}"></span>
+      </li>
+      <li>
+        Pembimbing:
+        <span th:text="${bapStatus['statusPembimbing'] == true ? 'Pembimbing telah memverifikasi BAP!' : 'Pembimbing belum memverifikasi BAP!'}"></span>
+      </li>
+      <li>
+        Mahasiswa:
+        <span th:text="${bapStatus['statusMahasiswa'] == true ? 'Mahasiswa telah memverifikasi BAP!' : 'Mahasiswa belum memverifikasi BAP!'}"></span>
+      </li>
+      <li>
+        Koordinator:
+        <span th:text="${bapStatus['statusKoordinator'] == true ? 'Koordinator telah memverifikasi BAP!' : 'Koordinator belum memverifikasi BAP!'}"></span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <img src="/assets/BAPimage.png" alt="BAP Preview" class="bap-preview">
+      <div class="modal-buttons">
+        <!-- Tombol Download -->
+        <a href="/assets/BAPimage.png" download="BAPimage.png" class="action-btn">Download</a>
+        <button class="action-btn" onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification -->
+  <div id="notification" class="notification"></div>
+
+  <!-- JavaScript -->
+  <script src="/js/pembimbing/bap.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", fetchBapStatus);
+  </script>
+</body>
+</html>

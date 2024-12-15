@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SidApp - Catatan Sidang</title>
+    <link rel="stylesheet" href="/css/mahasiswa/catatan-ta-css.css">
+</head>
+<body>
+    <a href="/mahasiswa/homescreen" class="back-button">←</a>
+
+    <div class="container">
+        <div class="header">
+            <h1>Catatan Sidang</h1>
+        </div>
+
+        <div class="section">
+            <label for="npm-dropdown">Pilih NPM Mahasiswa</label>
+            <select id="npm-dropdown">
+                <option value="" disabled selected>List Dosen Pembimbing</option>
+                <option value="6182201034" data-name="Pembimbing 1">Pembimbing 1</option>
+                <option value="6182201043" data-name="Pembimbing 2">Pembimbing 2</option>
+            </select>
+        </div>
+
+        <!-- Catatan Sidang -->
+        <div class="section">
+            <label for="sidang-notes">Catatan Sidang Tugas Akhir</label>
+            <textarea id="sidang-notes" readonly>
+......
+            </textarea>
+        </div>
+
+        <!-- Notification -->
+        <div id="notification" class="notification"></div>
+    </div>
+</body>
+<script src="catatan-ta.js" defer></script> 
+
+</html>
