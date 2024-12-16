@@ -8,11 +8,16 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import com.Tubes.code.Repository.CatatanSidangRepository;
+
 @Service
 public class CatatanTAService {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private CatatanSidangRepository catatanSidangRepository;
 
     public void initializeCatatanTa(int idTa, String nidPembimbing1, String nidPembimbing2) {
         String query = """
@@ -44,7 +49,7 @@ public class CatatanTAService {
         int rowsUpdated = jdbcTemplate.update(query,
                 currentUserId, newCatatan, // Untuk Catatan1
                 currentUserId, newCatatan, // Untuk Catatan2
-                npm                       // Untuk WHERE clause
+                npm                  
         );
 
         System.out.println("Rows updated: " + rowsUpdated);
@@ -81,5 +86,12 @@ public class CatatanTAService {
             defaultCatatan.put("Catatan2", "");
             return defaultCatatan;
         }
+    }
+
+    public Map<String, String> getCatatanByMahasiswaAndPembimbing(String npm, String nidPembimbing) {
+        System.out.println("Mencari catatan untuk Mahasiswa: " + npm + ", Pembimbing: " + nidPembimbing);
+        Map<String, String> catatan = catatanSidangRepository.findCatatanByMahasiswaAndPembimbing(npm, nidPembimbing);
+        System.out.println("Catatan ditemukan: " + catatan);
+        return catatan;
     }
 }

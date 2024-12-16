@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "PenilaianDetail")
 public class PenilaianDetail {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPenilaian;
@@ -23,7 +22,6 @@ public class PenilaianDetail {
     @Column(nullable = false, precision = 5, scale = 2)
     private BigDecimal nilai;
 
-    // Getters and Setters
     public int getIdPenilaian() {
         return idPenilaian;
     }
@@ -61,6 +59,14 @@ public class PenilaianDetail {
     }
 
     public void setNilai(BigDecimal nilai) {
+        this.nilai = nilai;
+    }
+
+    public PenilaianDetail(int idPenilaian, int idTa, int idNilai, String nidPenilai, BigDecimal nilai) {
+        this.idPenilaian = idPenilaian;
+        this.idTa = idTa;
+        this.idNilai = idNilai;
+        this.nidPenilai = nidPenilai;
         this.nilai = nilai;
     }
 }

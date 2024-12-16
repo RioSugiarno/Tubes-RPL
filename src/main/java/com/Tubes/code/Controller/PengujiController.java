@@ -4,6 +4,7 @@ import com.Tubes.code.Entity.InfoTugasAkhir;
 import com.Tubes.code.Entity.NpmMahasiswaPair;
 import com.Tubes.code.Service.DosenService;
 import com.Tubes.code.Service.InfoTugasAkhirService;
+import com.Tubes.code.Service.KomponenNilaiService;
 import com.Tubes.code.Service.PenilaianDetailService;
 
 import jakarta.servlet.http.HttpSession;
@@ -38,6 +39,9 @@ public class PengujiController {
 
     @Autowired
     PenilaianDetailService penilaianDetailService;
+
+    @Autowired
+    KomponenNilaiService komponenNilaiService;
 
 
     @GetMapping("/homescreen")
@@ -107,6 +111,9 @@ public class PengujiController {
 
             penilaianDetailService.saveAllPenilaianDetails(idTa, nidPenguji, nilaiMap);
 
+            // Tambahkan pemanggilan untuk update TotalScore
+            penilaianDetailService.updateTotalScore(idTa);
+            
             response.put("status", "success");
             response.put("message", "Data berhasil disimpan.");
         } catch (Exception e) {
@@ -117,6 +124,19 @@ public class PengujiController {
         return response;
     }
 
+    @GetMapping("/bobot-komponen")
+    @ResponseBody
+    public Map<Integer, Double> getBobotKomponen() {
+        Map<Integer, Double> bobotMap = new HashMap<>();
+        List<Map<String, Object>> komponenList = komponenNilaiService.getKomponenNilaiAsMap();
+
+        for (Map<String, Object> komponen : komponenList) {
+            Integer idKomponen = (Integer) komponen.get("idNilai");
+            Double bobot = ((BigDecimal) komponen.get("bobot")).doubleValue();
+            bobotMap.put(idKomponen, bobot);
+        }
+        return bobotMap;
+    }
     
     // Penguji = list drop down mahasiswa di bap
     @GetMapping("/bap")

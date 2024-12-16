@@ -1,11 +1,11 @@
 function updateEstimasiNilai() {
-    const presentasi = (parseFloat(document.getElementById("presentasi").value) || 0) * 0.2;
-    const tataTulis = (parseFloat(document.getElementById("tataTulis").value) || 0) * 0.2;
+    const presentasi = (parseFloat(document.getElementById("presentasi").value) || 0) * 0.1;
+    const tataTulis = (parseFloat(document.getElementById("tataTulis").value) || 0) * 0.15;
     const kelengkapanMateri = (parseFloat(document.getElementById("kelengkapanMateri").value) || 0) * 0.2;
-    const prosesBimbingan = (parseFloat(document.getElementById("prosesBimbingan").value) || 0) * 0.2;
-    const penguasaanMateri = (parseFloat(document.getElementById("penguasaanMateri").value) || 0) * 0.2;
+    const pencapaianTujuan = (parseFloat(document.getElementById("pencapaianTujuan").value) || 0) * 0.25;
+    const penguasaanMateri = (parseFloat(document.getElementById("penguasaanMateri").value) || 0) * 0.3;
 
-    const totalNilai = presentasi + tataTulis + kelengkapanMateri + prosesBimbingan + penguasaanMateri;
+    const totalNilai = presentasi + tataTulis + kelengkapanMateri + pencapaianTujuan + penguasaanMateri;
     document.getElementById("totalNilai").innerText = totalNilai.toFixed(2);
 }
 
@@ -40,7 +40,6 @@ document.querySelectorAll("#penilaianForm input").forEach(input => {
     input.addEventListener("input", updateEstimasiNilai);
 });
 
-// Reject apabila semua field belum terisi
 function validateFormData() {
     const inputs = document.querySelectorAll("#penilaianForm input");
     for (let input of inputs) {
@@ -60,7 +59,7 @@ document.getElementById("penilaianForm").addEventListener("submit", function (ev
 
 // Submit Nilai
 document.getElementById("penilaianForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Mencegah pengiriman form default
+    event.preventDefault();
 
     const formData = new FormData(this);
     document.querySelectorAll("input[data-komponen-id]").forEach(input => {
@@ -77,7 +76,6 @@ document.getElementById("penilaianForm").addEventListener("submit", function (ev
             if (data.status === "error") {
                 alert(data.message); // Jika sudah dinilai, tampilkan pesan error
             } else {
-                // Lanjutkan pengiriman jika belum dinilai
                 fetch(this.action, {
                     method: this.method,
                     body: new URLSearchParams(formData),
@@ -94,7 +92,7 @@ document.getElementById("penilaianForm").addEventListener("submit", function (ev
                     .then(data => {
                         if (data.status === "success") {
                             alert(data.message);
-                            window.location.href = "/penguji/homescreen"; // Balik ke Homescreen setelah Input Nilai
+                            window.location.href = "/penguji/homescreen";
                         } else {
                             alert("Error: " + data.message);
                         }
@@ -110,3 +108,51 @@ document.getElementById("penilaianForm").addEventListener("submit", function (ev
             alert("Terjadi kesalahan koneksi: " + error.message);
         });
 });
+
+// Menghitung Estimasi Nilai - Belum
+// let bobotKomponen = {};
+// let bobotLoaded = false; // Indikator apakah data bobot telah dimuat
+
+// // Ambil bobot komponen dari backend
+// fetch('/penguji/bobot-komponen')
+//     .then(response => response.json())
+//     .then(data => {
+//         bobotKomponen = data;
+//         bobotLoaded = true; // Tandai bahwa data bobot telah tersedia
+//         console.log('Bobot Komponen:', bobotKomponen);
+//     })
+//     .catch(error => console.error('Error fetching bobot:', error));
+
+// // Fungsi untuk memperbarui estimasi nilai
+// function updateEstimasiNilai() {
+//     if (!bobotLoaded) {
+//         console.warn("Bobot belum dimuat. Tunggu hingga data tersedia.");
+//         return;
+//     }
+
+//     let totalNilai = 0;
+
+//     // Iterasi semua input dengan atribut data-komponen-id
+//     document.querySelectorAll("input[data-komponen-id]").forEach(input => {
+//         const idKomponen = input.getAttribute("data-komponen-id");
+//         const nilai = parseFloat(input.value) || 0;
+//         const bobot = bobotKomponen[idKomponen] || 0;
+
+//         totalNilai += nilai * bobot; // Hitung nilai total berdasarkan bobot
+//     });
+
+//     // Perbarui elemen estimasi nilai
+//     const estimasiElement = document.getElementById("totalNilai");
+//     if (estimasiElement) {
+//         estimasiElement.innerText = totalNilai.toFixed(2);
+//     } else {
+//         console.error("Elemen #totalNilai tidak ditemukan di halaman.");
+//     }
+// }
+
+// // Tambahkan event listener untuk setiap input nilai
+// document.addEventListener("DOMContentLoaded", () => {
+//     document.querySelectorAll("input[data-komponen-id]").forEach(input => {
+//         input.addEventListener("input", updateEstimasiNilai);
+//     });
+// });

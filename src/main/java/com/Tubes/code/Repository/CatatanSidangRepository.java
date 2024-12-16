@@ -1,15 +1,21 @@
 package com.Tubes.code.Repository;
 
 import com.Tubes.code.Entity.CatatanSidang;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 @Repository
 public class CatatanSidangRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    //coba lagi bagian ini guys
     // public int save(CatatanSidang catatan) {
     //     String sql = "INSERT INTO CatatanSidang (ID_TA, Catatan, NID_Mahasiswa, NID_Penguji) VALUES (?, ?, ?, ?)";
     //     System.out.println("Executing query: " + sql);
@@ -49,6 +55,37 @@ public class CatatanSidangRepository {
             System.out.println("Rows inserted into catatansidang.");
         } else {
             System.out.println("Rows updated in catatansidang.");
+        }
+    }
+
+    public Map<String, String> findCatatanByMahasiswaAndPembimbing(String npm, String nidPembimbing) {
+        String query = """
+                    SELECT Catatan1, Catatan2
+                    FROM catatansidang
+                    WHERE ID_TA = (
+                        SELECT ID_TA
+                        FROM informasitugasakhir
+                        WHERE NIM = ?
+                    )
+                    AND (NID_Pembimbing1 = ? OR NID_Pembimbing2 = ?)
+                    LIMIT 1;
+                """;
+
+        try {
+            return jdbcTemplate.queryForObject(query, new Object[] { npm, nidPembimbing, nidPembimbing },
+                    (rs, rowNum) -> {
+                        Map<String, String> catatanMap = new HashMap<>();
+                        catatanMap.put("Catatan1", rs.getString("Catatan1"));
+                        catatanMap.put("Catatan2", rs.getString("Catatan2"));
+                        return catatanMap;
+                    });
+        } catch (EmptyResultDataAccessException e) {
+            System.out.println(
+                    "Tidak ditemukan catatan untuk mahasiswa: " + npm + " dengan pembimbing: " + nidPembimbing);
+            Map<String, String> defaultCatatan = new HashMap<>();
+            defaultCatatan.put("Catatan1", "");
+            defaultCatatan.put("Catatan2", "");
+            return defaultCatatan;
         }
     }
 }
