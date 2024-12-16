@@ -90,29 +90,57 @@ public class LoginController {
     //     }
     // }
 
+    // Udah Jalan untuk Penguji, Pembimbing, Koordinator
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) throws Exception {
+    public String login(@RequestParam String username,
+            @RequestParam String password,
+            Model model,
+            HttpSession session) throws Exception {
         User user = userService.login(username, password);
         if (user != null) {
-            if ("Pembimbing".equals(user.getRole()) || "Penguji".equals(user.getRole()) || "Koordinator".equals(user.getRole())) {
-                String nid = dosenService.getNID(user.getNamaLengkap());
-                if (nid == null) {
-                    model.addAttribute("error", "NID tidak ditemukan untuk pengguna.");
-                    return "login";
+            switch (user.getRole()) {
+                case "Mahasiswa" -> {
+                    // Cari NIM Mahasiswa berdasarkan username
+                    String nim = mahasiswaService.findNIMByUsername(username);
+                    if (nim == null) {
+                        model.addAttribute("error", "NIM tidak ditemukan untuk mahasiswa.");
+                        return "login";
+                    }
+                    session.setAttribute("loggedInUser", nim); // Simpan NIM di sesi
+                    return "redirect:/mahasiswa/homescreen";
                 }
-                session.setAttribute("loggedInUser", nid);
-            } else {
-                String nid = mahasiswaService.getNIM(user.getNamaLengkap());
-                session.setAttribute("loggedInUser", nid);
+                case "Koordinator" -> {
+                    String nidKoordinator = dosenService.getNID(user.getNamaLengkap());
+                    if (nidKoordinator == null) {
+                        model.addAttribute("error", "NID tidak ditemukan untuk koordinator.");
+                        return "login";
+                    }
+                    session.setAttribute("loggedInUser", nidKoordinator); // Simpan NID Koordinator di sesi
+                    return "redirect:/koordinator/homescreen"; // Redirect ke homescreen Koordinator
+                }
+                case "Penguji" -> {
+                    String nidPenguji = dosenService.getNID(user.getNamaLengkap());
+                    if (nidPenguji == null) {
+                        model.addAttribute("error", "NID tidak ditemukan untuk penguji.");
+                        return "login";
+                    }
+                    session.setAttribute("loggedInUser", nidPenguji); // Simpan NID Penguji di sesi
+                    return "redirect:/penguji/homescreen"; // Redirect ke homescreen Penguji
+                }
+                case "Pembimbing" -> {
+                    String nidPembimbing = dosenService.getNID(user.getNamaLengkap());
+                    if (nidPembimbing == null) {
+                        model.addAttribute("error", "NID tidak ditemukan untuk pembimbing.");
+                        return "login";
+                    }
+                    session.setAttribute("loggedInUser", nidPembimbing); // Simpan NID Pembimbing di sesi
+                    return "redirect:/pembimbing/homescreen"; // Redirect ke homescreen Pembimbing
+                }
+                default -> {
+                    model.addAttribute("error", "Role tidak valid.");
+                    return "login"; // Role tidak valid, kembali ke halaman login
+                }
             }
-
-            return switch (user.getRole()) {
-                case "Mahasiswa" -> "redirect:/mahasiswa/homescreen";
-                case "Koordinator" -> "redirect:/koordinator/homescreen";
-                case "Penguji" -> "redirect:/penguji/homescreen";
-                case "Pembimbing" -> "redirect:/pembimbing/homescreen";
-                default -> "redirect:/login";
-            };
         } else {
             model.addAttribute("error", "Invalid username or password");
             return "login";

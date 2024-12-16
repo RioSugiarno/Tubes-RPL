@@ -1,8 +1,9 @@
+// Estimasi Belum Benar
 function updateEstimasiNilai() {
     const tataTulis = (parseFloat(document.getElementById("tataTulis").value) || 0) * 0.2;
     const kelengkapanMateri = (parseFloat(document.getElementById("kelengkapanMateri").value) || 0) * 0.2;
-    const prosesBimbingan = (parseFloat(document.getElementById("prosesBimbingan").value) || 0) * 0.2;
-    const penguasaanMateri = (parseFloat(document.getElementById("penguasaanMateri").value) || 0) * 0.2;
+    const prosesBimbingan = (parseFloat(document.getElementById("prosesBimbingan").value) || 0) * 0.3;
+    const penguasaanMateri = (parseFloat(document.getElementById("penguasaanMateri").value) || 0) * 0.3;
 
     const totalNilai = tataTulis + kelengkapanMateri + prosesBimbingan + penguasaanMateri;
     document.getElementById("totalNilai").innerText = totalNilai.toFixed(2);

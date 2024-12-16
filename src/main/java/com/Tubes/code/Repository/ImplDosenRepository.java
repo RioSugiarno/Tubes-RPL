@@ -31,6 +31,27 @@ public class ImplDosenRepository implements DosenRepository{
         return result.isEmpty() ? Optional.empty() : Optional.of(result.get(0));
     }
 
+    @Override
+    public List<Dosen> findPembimbingByMahasiswa(String nimMahasiswa) {
+        String query = """
+            SELECT d.NID, d.Nama, d.username, d.password, d.role
+            FROM Dosen d
+            JOIN InformasiTugasAkhir ta ON (d.NID = ta.nid_pembimbing1 OR d.NID = ta.nid_pembimbing2)
+            WHERE ta.nim = ?
+        """;
+
+        List<Dosen> pembimbingList = template.query(query, (rs, rowNum) -> new Dosen(
+                rs.getString("NID"),
+                rs.getString("Nama"),
+                rs.getString("username"),
+                rs.getString("password"),
+                rs.getString("role")
+        ), nimMahasiswa);
+
+        System.out.println("Pembimbing dari Repository: " + pembimbingList); // Debugging
+        return pembimbingList;
+    }
+
     private Dosen mapRowToDosen(ResultSet rs, int rowNum) throws SQLException {
         return new Dosen(
                 rs.getString("nid"),

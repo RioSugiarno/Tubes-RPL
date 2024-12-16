@@ -5,6 +5,7 @@ import com.Tubes.code.Repository.DosenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,4 +28,10 @@ public class DosenService {
         System.out.println("NID tidak ditemukan untuk nama: " + nama); // Debug log
         return null;
     }
+
+    public List<Dosen> getPembimbingByMahasiswa(String nimMahasiswa) {
+        List<Dosen> pembimbingList = dosenRepository.findPembimbingByMahasiswa(nimMahasiswa);
+        System.out.println("Pembimbing dari Service: " + pembimbingList); // Debugging
+        return pembimbingList;
+    } 
 }

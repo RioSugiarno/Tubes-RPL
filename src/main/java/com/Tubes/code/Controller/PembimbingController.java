@@ -113,6 +113,9 @@ public class PembimbingController {
 
             penilaianDetailService.saveAllPenilaianDetails(idTa, nidPembimbing, nilaiMap);
 
+            // Tambahkan pemanggilan untuk update TotalScore
+            penilaianDetailService.updateTotalScore(idTa);
+            
             response.put("status", "success");
             response.put("message", "Data berhasil disimpan.");
         } catch (Exception e) {

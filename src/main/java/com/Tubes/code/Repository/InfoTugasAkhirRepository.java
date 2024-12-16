@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.data.jdbc.repository.query.Query;
+import org.springframework.data.repository.query.Param;
+
 public interface InfoTugasAkhirRepository {
     boolean insertDataMahasiswa(String npm, String judul, String jenis, String pembimbing1, String pembimbing2);
     boolean insertJadwalMahasiswa(String npm, LocalDate tanggal, LocalTime waktu, String tempat, String penguji1, String penguji2);
@@ -19,7 +22,8 @@ public interface InfoTugasAkhirRepository {
     // List<InfoTugasAkhir> findSidangByPenguji(String nidPenguji);
     List<Map<String, Object>> findSidangByPengujiWithNames(String nidPenguji);
     List<Map<String, Object>> findSidangByPembimbingWithNames(String nidPembimbing);
-
+    List<Map<String, Object>> findSidangByMahasiswaWithNames(String nimMahasiswa);
+    
     // Input nilai sidang penguji
     int findIdTaByNpm(String npm); // Hapus tubuh method
     int findIdKomponenNilaiByDeskripsi(String deskripsi); // Hapus tubuh method
@@ -31,4 +35,11 @@ public interface InfoTugasAkhirRepository {
 
     // Inisialisasi Catatan TA
     void insertOrUpdateCatatanTa(int idTa, String nidPembimbing1, String nidPembimbing2, String npm, String catatan, String loggedInNid);
+
+    @Query
+    ("SELECT id_ta FROM InformasiTugasAkhir WHERE nim = :nim LIMIT 1")
+    int findIdTaByNim(@Param("nim") String nim);
+
+    @Query("SELECT nama FROM Dosen WHERE nid = :nid LIMIT 1")
+    String findNamaDosenByNID(@Param("nid") String nid);
 }

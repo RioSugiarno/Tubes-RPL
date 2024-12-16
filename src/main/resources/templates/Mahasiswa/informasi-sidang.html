@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penilaian Tugas Akhir</title>
+    <link rel="stylesheet" href="/css/mahasiswa/informasi-sidang.css">
+</head>
+
+<body>
+    <a href="/mahasiswa/homescreen" class="back-button">←</a>
+    <div class="container">
+        <div class="header">
+            <h1>Informasi Sidang Mahasiswa</h1>
+        </div>
+
+        <!-- Tabel dengan Struktur Sesuai Gambar -->
+        <table class="sidang-table">
+            <thead>
+                <tr>
+                    <th>NPM - Nama</th>
+                    <th>Tanggal/Waktu</th>
+                    <th>Ruangan</th>
+                    <th>Koordinator</th>
+                    <th>Penguji 1</th>
+                    <th>Penguji 2</th>
+                    <th>Pembimbing 1</th>
+                    <th>Pembimbing 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${sidangList.isEmpty()}">
+                    <td colspan="8" style="text-align:center;">Data sidang tidak ditemukan.</td>
+                </tr>
+                <tr th:each="sidang : ${sidangList}">
+                    <td th:text="${sidang.nim} + ' - ' + ${sidang.namaMahasiswa}"></td>
+                    <td th:text="${sidang.tanggal} + ' ' + ${sidang.waktu}"></td>
+                    <td th:text="${sidang.tempat}"></td>
+                    <td th:text="${sidang.namaKoordinator}"></td>
+                    <td th:text="${sidang.namaPenguji1}"></td>
+                    <td th:text="${sidang.namaPenguji2}"></td>
+                    <td th:text="${sidang.namaPembimbing1}"></td>
+                    <td th:text="${sidang.namaPembimbing2}"></td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

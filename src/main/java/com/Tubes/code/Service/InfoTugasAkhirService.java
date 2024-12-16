@@ -1,11 +1,15 @@
 package com.Tubes.code.Service;
 
 import com.Tubes.code.Entity.InfoTugasAkhir;
+import com.Tubes.code.Entity.NilaiTotal;
 import com.Tubes.code.Entity.NpmMahasiswaPair;
 import com.Tubes.code.Repository.InfoTugasAkhirRepository;
+import com.Tubes.code.Repository.NilaiTotalRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -20,6 +24,8 @@ public class InfoTugasAkhirService {
     private MahasiswaService mahasiswaService;
     @Autowired
     private DosenService dosenService;
+    @Autowired
+    private NilaiTotalRepository nilaiTotalRepository;
 
     public Optional<List<NpmMahasiswaPair>> findPair(){
         Optional<List<NpmMahasiswaPair>> pairs = infoTugasAkhirRepository.createPair();
@@ -29,33 +35,21 @@ public class InfoTugasAkhirService {
         return Optional.empty();
     }
 
-    // public boolean addDataMahasiswa(String npm, String judul, String jenis, String pembimbing1, String pembimbing2){
-    //     String nid_pembimbing1 = dosenService.getNID(pembimbing1);
-    //     String nid_pembimbing2 = dosenService.getNID(pembimbing2);
-    //     boolean validNpm = mahasiswaService.isPresent(npm);
-    //     if (!nid_pembimbing1.isEmpty()&&!nid_pembimbing2.isEmpty()&&validNpm){
-    //         infoTugasAkhirRepository.insertDataMahasiswa(npm, judul, jenis, nid_pembimbing1, nid_pembimbing2);
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
-    // Add Data Mahasiswa dengan Inisialisasi BAP
+    // Add Data Mahasiswa dengan Inisialisasi BAP & Catatan TA
     // public boolean addDataMahasiswa(String npm, String judul, String jenis, String pembimbing1, String pembimbing2) {
     //     try {
-    //         // Validasi dosen dan mahasiswa
     //         String nidPembimbing1 = dosenService.getNID(pembimbing1);
     //         String nidPembimbing2 = dosenService.getNID(pembimbing2);
     //         boolean validNpm = mahasiswaService.isPresent(npm);
-
+    
     //         if (!nidPembimbing1.isEmpty() && !nidPembimbing2.isEmpty() && validNpm) {
     //             // Tambahkan data mahasiswa ke tabel InformasiTugasAkhir
     //             infoTugasAkhirRepository.insertDataMahasiswa(npm, judul, jenis, nidPembimbing1, nidPembimbing2);
-
-    //             // Ambil ID_TA setelah data mahasiswa dimasukkan
+    
+    //             // Ambil ID_TA untuk data mahasiswa yang baru saja ditambahkan
     //             int idTa = infoTugasAkhirRepository.findIdTaByNpm(npm);
-
-    //             // Inisialisasi tabel BAP dengan data pembimbing, mahasiswa, dan koordinator
+    
+    //             // Inisialisasi tabel BAP
     //             infoTugasAkhirRepository.insertBap(
     //                 idTa,
     //                 null, // NID_Penguji_1 akan diisi nanti
@@ -65,29 +59,45 @@ public class InfoTugasAkhirService {
     //                 npm,
     //                 "7182201001" // ID Koordinator
     //             );
-
+    
+    //             // Inisialisasi atau perbarui tabel Catatan TA
+    //             infoTugasAkhirRepository.insertOrUpdateCatatanTa(
+    //                 idTa,
+    //                 nidPembimbing1,
+    //                 nidPembimbing2,
+    //                 npm,
+    //                 "", // Catatan awal kosong
+    //                 ""
+    //             );
+    
     //             return true;
     //         }
     //         return false;
     //     } catch (Exception e) {
-    //         throw new RuntimeException("Gagal menambahkan data mahasiswa dan menginisialisasi BAP: " + e.getMessage(), e);
+    //         throw new RuntimeException("Gagal menambahkan data mahasiswa dan menginisialisasi Catatan TA: " + e.getMessage(), e);
     //     }
     // }
 
-    // Add Data Mahasiswa dengan Inisialisasi BAP & Catatan TA
+    // Add Data Mahasiswa Test dengan NilaiTotal
     public boolean addDataMahasiswa(String npm, String judul, String jenis, String pembimbing1, String pembimbing2) {
         try {
             String nidPembimbing1 = dosenService.getNID(pembimbing1);
             String nidPembimbing2 = dosenService.getNID(pembimbing2);
             boolean validNpm = mahasiswaService.isPresent(npm);
-    
+
             if (!nidPembimbing1.isEmpty() && !nidPembimbing2.isEmpty() && validNpm) {
                 // Tambahkan data mahasiswa ke tabel InformasiTugasAkhir
                 infoTugasAkhirRepository.insertDataMahasiswa(npm, judul, jenis, nidPembimbing1, nidPembimbing2);
-    
+
                 // Ambil ID_TA untuk data mahasiswa yang baru saja ditambahkan
                 int idTa = infoTugasAkhirRepository.findIdTaByNpm(npm);
-    
+
+                // Inisialisasi tabel NilaiTotal
+                NilaiTotal nilaiTotal = new NilaiTotal();
+                nilaiTotal.setIdTa(idTa);
+                nilaiTotal.setTotal(BigDecimal.ZERO); // Nilai awal 0
+                nilaiTotalRepository.saveOrUpdate(nilaiTotal);
+
                 // Inisialisasi tabel BAP
                 infoTugasAkhirRepository.insertBap(
                     idTa,
@@ -98,7 +108,7 @@ public class InfoTugasAkhirService {
                     npm,
                     "7182201001" // ID Koordinator
                 );
-    
+
                 // Inisialisasi atau perbarui tabel Catatan TA
                 infoTugasAkhirRepository.insertOrUpdateCatatanTa(
                     idTa,
@@ -108,12 +118,12 @@ public class InfoTugasAkhirService {
                     "", // Catatan awal kosong
                     ""
                 );
-    
+
                 return true;
             }
             return false;
         } catch (Exception e) {
-            throw new RuntimeException("Gagal menambahkan data mahasiswa dan menginisialisasi Catatan TA: " + e.getMessage(), e);
+            throw new RuntimeException("Gagal menambahkan data mahasiswa dan menginisialisasi tabel: " + e.getMessage(), e);
         }
     }
 
@@ -168,6 +178,10 @@ public class InfoTugasAkhirService {
         return infoTugasAkhirRepository.findSidangByPembimbingWithNames(nidPembimbing);
     }
 
+    public List<Map<String, Object>> getSidangByMahasiswaWithNames(String nimMahasiswa) {
+        return infoTugasAkhirRepository.findSidangByMahasiswaWithNames(nimMahasiswa);
+    }
+
     public int findIdTaByNpm(String npm) {
         return infoTugasAkhirRepository.findIdTaByNpm(npm);
     }
@@ -196,5 +210,9 @@ public class InfoTugasAkhirService {
             throw new IllegalArgumentException("InfoTugasAkhir tidak ditemukan untuk NPM: " + npm);
         }
         return infoTugasAkhir;
+    }
+
+    public int findIdTaByNim(String npm) {
+        return infoTugasAkhirRepository.findIdTaByNpm(npm);
     }
 }

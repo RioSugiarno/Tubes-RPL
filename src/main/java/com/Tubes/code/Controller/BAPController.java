@@ -65,6 +65,7 @@ public class BAPController {
     }
 
 
+    // Udah Jalan untuk Penguji, Pembimbing, Koordinator
     @PostMapping("/upload")
     public ResponseEntity<?> uploadBap(@RequestParam("npm") String npm, HttpSession session) {
         // Ambil currentUserId dari session
@@ -79,6 +80,28 @@ public class BAPController {
 
         try {
             bapService.updateBapStatus(npm, currentUserId);
+            return ResponseEntity.ok("Status BAP diperbarui.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Gagal memperbarui status BAP.");
+        }
+    }
+
+    // Tes Mahasiswa
+    @PostMapping("/upload2")
+    public ResponseEntity<?> uploadBap2(@RequestParam("npm") String npm, HttpSession session) {
+        // Ambil currentUserId dari session
+        String currentUserId = (String) session.getAttribute("loggedInUser");
+        if (currentUserId == null || currentUserId.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not logged in or invalid session.");
+        }
+
+        System.out.println("Received request:");
+        System.out.println("npm: " + npm);
+        System.out.println("currentUserId from session: " + currentUserId);
+
+        try {
+            bapService.updateBapStatus(currentUserId, currentUserId);
             return ResponseEntity.ok("Status BAP diperbarui.");
         } catch (Exception e) {
             e.printStackTrace();

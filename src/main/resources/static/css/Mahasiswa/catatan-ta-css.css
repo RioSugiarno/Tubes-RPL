@@ -1,0 +1,88 @@
+/* Reset dasar */
+body, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Gaya body */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #E0FBE2;
+    color: #333;
+    line-height: 1.6;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container utama */
+.container {
+    width: 900px; /* Gunakan width jika ingin ukuran tetap */
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Bagian dengan margin */
+.section {
+    margin-bottom: 20px;
+}
+
+/* Judul */
+h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: black;
+    border-bottom: 2px solid gray;
+    padding-bottom: 5px;
+}
+
+/* Daftar pembimbing */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    font-size: 18px;
+    padding: 5px 0;
+    color: #555;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Catatan */
+p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Animasi hover */
+li:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+/* Style for the back button */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 15px;
+    color: black;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+.back-button:hover {
+    color: #45a049;
+}   

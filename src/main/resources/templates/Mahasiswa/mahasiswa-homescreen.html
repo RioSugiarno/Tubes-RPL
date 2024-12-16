@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Screen</title>
     <link rel="stylesheet" href="/css/mahasiswa-homescreen-css.css">
+    <style>
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('/assets/background.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
     <div class="background">
@@ -15,18 +29,18 @@
     <a href="/logout" class="back-button">←</a>
 
     <div class="homescreen-container">
-        <h2 >Selamat Datang, <br><sp th:text="${mahasiswa}"></sp>!</h2>
+        <h2 >Selamat Datang, <br><span th:text="${mahasiswa}"></span> !</h2>
         <div class="button-group">
-            <a href="../MAHASISWA/informasi-sidangta/informasi-sidang.html">
+            <a href="/mahasiswa/informasi-sidang">
                 <button>Informasi Sidang</button>
             </a>
-            <a href="../MAHASISWA/nilai-ta/nilai.html">
+            <a href="/mahasiswa/nilai">
                 <button>Nilai TA</button>
             </a>
-            <a href="mahasiswa-catatan-ta.html">
+            <a href="/mahasiswa/catatan-ta">
                 <button>Catatan TA</button>
             </a>
-            <a href="../MAHASISWA/bap/bap.html" >
+            <a href="/mahasiswa/bap" >
                 <button>BAP</button>
             </a>
         </div>
