@@ -48,7 +48,14 @@ public class MahasiswaController {
     @Autowired
     private CatatanSidangRepository catatanSidangRepository;
 
-    @GetMapping("/homescreen")
+/**
+ * Menampilkan halaman homescreen untuk mahasiswa berdasarkan sesi login.
+ *
+ * @param session HttpSession yang menyediakan informasi sesi login.
+ * @param model Model yang digunakan untuk menyimpan atribut yang akan diteruskan ke view.
+ * @return String path ke view halaman homescreen mahasiswa.
+ */
+@GetMapping("/homescreen")
     public String homescreen(HttpSession session, Model model) {
         String nimMahasiswa = (String) session.getAttribute("loggedInUser");
         if (nimMahasiswa == null) {
@@ -67,7 +74,14 @@ public class MahasiswaController {
         return "mahasiswa/mahasiswa-homescreen"; // Redirect ke homescreen
     }
 
-    @GetMapping("/informasi-sidang")
+/**
+ * Mengambil dan menampilkan informasi sidang berdasarkan NIM mahasiswa dari sesi.
+ *
+ * @param session HttpSession yang menyediakan informasi sesi login.
+ * @param model Model yang digunakan untuk menyimpan data sidang yang akan diteruskan ke view.
+ * @return String path ke view halaman informasi sidang mahasiswa.
+ */
+@GetMapping("/informasi-sidang")
     public String getSidangByMahasiswa(HttpSession session, Model model) {
         // Mengambil nimMahasiswa dari session
         String nimMahasiswa = (String) session.getAttribute("loggedInUser");
@@ -83,7 +97,14 @@ public class MahasiswaController {
         return "mahasiswa/informasi-sidang";
     }
 
-    @GetMapping("/nilai")
+/**
+ * Menampilkan daftar nilai yang relevan untuk mahasiswa berdasarkan pasangan NPM.
+ *
+ * @param model Model yang digunakan untuk menyimpan data nilai mahasiswa yang akan diteruskan ke view.
+ * @param session HttpSession yang menawarkan data sesi login.
+ * @return String path ke view halaman nilai mahasiswa.
+ */
+@GetMapping("/nilai")
     public String getNilai(Model model, HttpSession session) {
         Optional<List<NpmMahasiswaPair>> pair = infoTugasAkhirService.findPair();
         if (pair.isPresent() && !pair.get().isEmpty()) {
@@ -92,7 +113,14 @@ public class MahasiswaController {
         return "mahasiswa/nilai";
     }
 
-    @GetMapping("/catatan-ta")
+/**
+ * Menampilkan catatan Tugas Akhir (TA) yang relevan untuk mahasiswa.
+ *
+ * @param model Model yang digunakan untuk menyimpan data catatan TA mahasiswa yang akan diteruskan ke view.
+ * @param session HttpSession yang menawarkan data sesi login.
+ * @return String path ke view halaman catatan TA mahasiswa.
+ */
+@GetMapping("/catatan-ta")
     public String getCatatanTa(Model model, HttpSession session) {
         Optional<List<NpmMahasiswaPair>> pair = infoTugasAkhirService.findPair();
         if (pair.isPresent() && !pair.get().isEmpty()) {
@@ -101,7 +129,14 @@ public class MahasiswaController {
         return "mahasiswa/catatan-ta";
     }
 
-    @GetMapping("/bap")
+/**
+ * Menampilkan Berita Acara Pelaksanaan (BAP) untuk mahasiswa yang sesuai.
+ *
+ * @param model Model yang digunakan untuk menyimpan data BAP mahasiswa yang akan diteruskan ke view.
+ * @param session HttpSession menawarkan data sesi login.
+ * @return String path ke view halaman BAP mahasiswa.
+ */
+@GetMapping("/bap")
     public String getBAP(Model model, HttpSession session) {
         Optional<List<NpmMahasiswaPair>> pair = infoTugasAkhirService.findPair();
         if (pair.isPresent() && !pair.get().isEmpty()) {
@@ -110,7 +145,16 @@ public class MahasiswaController {
         return "mahasiswa/bap";
     }
 
-    @PostMapping("/login")
+/**
+ * Melakukan proses autentikasi login mahasiswa berdasarkan NIM dan password.
+ *
+ * @param nim NIM yang dimasukkan oleh mahasiswa.
+ * @param password Password yang dimasukkan oleh mahasiswa.
+ * @param session HttpSession yang digunakan untuk menyimpan data login.
+ * @param model Model yang digunakan untuk menyimpan pesan error jika login gagal.
+ * @return String path ke homescreen mahasiswa jika login berhasil, atau login ulang jika gagal.
+ */
+@PostMapping("/login")
     public String login(@RequestParam("nim") String nim,
             @RequestParam("password") String password,
             HttpSession session,

@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+/**
+ * This class handles login-related processes, including login authentication
+ * and session management for users with roles such as Mahasiswa, Koordinator,
+ * Penguji, and Pembimbing.
+ */
 public class LoginController {
 
     @Autowired
@@ -25,12 +30,22 @@ public class LoginController {
     DosenService dosenService;
 
     // Kalo akses localhost:8080, langsung ke halaman login.
-    @GetMapping("/")
+@GetMapping("/")
+    /**
+     * Redirects requests to the root URL ("/") to the login page.
+     *
+     * @return A redirect string to the "/login" URL.
+     */
     public String redirectToLogin() {
         return "redirect:/login";
     }
 
-    @GetMapping("/login")
+@GetMapping("/login")
+    /**
+     * Displays the login page.
+     *
+     * @return The name of the HTML file for the login page.
+     */
     public String login() {
         return "login";
     }
@@ -90,7 +105,18 @@ public class LoginController {
     //     }
     // }
 
-    @PostMapping("/login")
+@PostMapping("/login")
+    /**
+     * Authenticates the user and redirects to the appropriate homepage based on the user's role.
+     * Session attributes are set according to the user's role and credentials.
+     *
+     * @param username The username entered by the user.
+     * @param password The password entered by the user.
+     * @param model The Model to pass attributes for view rendering.
+     * @param session The HttpSession to store user session data.
+     * @return A redirect string to the appropriate homepage or to the login page if authentication fails.
+     * @throws Exception If an error occurs during the authentication process.
+     */
     public String login(@RequestParam String username,
             @RequestParam String password,
             Model model,
@@ -146,7 +172,13 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/logout")
+@GetMapping("/logout")
+    /**
+     * Logs out the current user by invalidating the session and redirects to the login page.
+     *
+     * @param session The HttpSession to be invalidated.
+     * @return A redirect string to the "/login" URL.
+     */
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/login";

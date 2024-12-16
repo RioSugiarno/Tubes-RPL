@@ -28,6 +28,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/penguji")
+/**
+ * PengujiController handles the flow of data and business logic related to 'Penguji',
+ * including managing homescreens, displaying 'informasi-sidang', inputting scores for sessions,
+ * and handling BAP (Berita Acara Pemeriksaan) functionalities.
+ */
 public class PengujiController {
 
     @Autowired
@@ -40,6 +45,12 @@ public class PengujiController {
     PenilaianDetailService penilaianDetailService;
 
 
+    /**
+     * Displays the home screen for the penguji user.
+     * @param model Spring Model object to pass data to the view.
+     * @param session HttpSession object to retrieve the logged-in user's information.
+     * @return String representing the view for the penguji home screen.
+     */
     @GetMapping("/homescreen")
     public String homescreen(Model model, HttpSession session) {
         String penguji = (String) session.getAttribute("loggedInUser");
@@ -48,6 +59,12 @@ public class PengujiController {
     }
 
     // Penguji = informasi sidang
+    /**
+     * Fetches and displays information about the thesis sessions ('sidang') for a specific penguji.
+     * @param model Spring Model object to pass the list of 'sidang' to the view.
+     * @param session HttpSession object to identify the logged-in penguji user.
+     * @return String representing the view for displaying 'informasi-sidang'.
+     */
     @GetMapping("/informasi-sidang")
     public String getInformasiSidang(Model model, HttpSession session) {
         String nidPenguji = (String) session.getAttribute("loggedInUser"); // NID dari session
@@ -61,6 +78,12 @@ public class PengujiController {
     }
 
     // Penguji = list drop down mahasiswa di input-nilai-sidang
+    /**
+     * Displays a form for inputting thesis session scores. Provides a list of
+     * students paired with their respective NPM (Nomor Pokok Mahasiswa).
+     * @param model Spring Model object to pass the list of student-NPM pairs for display.
+     * @return String representing the view for inputting thesis session scores.
+     */
     @GetMapping("/input-nilai-sidang")
     public String getInputNilaiSidang(Model model) {
         Optional<List<NpmMahasiswaPair>> pair = infoTugasAkhirService.findPair();
@@ -70,6 +93,14 @@ public class PengujiController {
         return "penguji/input-nilai-sidang";
     }
 
+    /**
+     * Processes the submitted thesis scores for a student by a penguji.
+     * Retrieves the session ID based on the student's NPM and validates the score submission.
+     * @param npm String representing the student's unique NPM.
+     * @param nilaiInputs Map of component IDs (keys starting with 'komponen_') and their respective scores.
+     * @param session HttpSession object to retrieve the logged-in penguji user's information.
+     * @return Map containing the status ('success' or 'error') and a corresponding message.
+     */
     @PostMapping("/input-nilai-sidang")
     @ResponseBody
     public Map<String, String> postInputNilaiSidang(
@@ -119,6 +150,13 @@ public class PengujiController {
 
     
     // Penguji = list drop down mahasiswa di bap
+    /**
+     * Displays a form for creating or editing BAP (Berita Acara Pemeriksaan) for thesis sessions.
+     * Provides a list of students paired with their respective NPM (Nomor Pokok Mahasiswa).
+     * @param model Spring Model object to pass the list of student-NPM pairs for display.
+     * @param session HttpSession object to retrieve the logged-in penguji user's information.
+     * @return String representing the view for BAP input or editing.
+     */
     @GetMapping("/bap")
     public String getBap(Model model, HttpSession session) {
         Optional<List<NpmMahasiswaPair>> pair = infoTugasAkhirService.findPair();
@@ -128,6 +166,13 @@ public class PengujiController {
         return "penguji/bap";
     }
 
+    /**
+     * Processes the submitted data for BAP (Berita Acara Pemeriksaan).
+     * This method is currently not implemented.
+     * @param model Spring Model object to pass any required data to the view.
+     * @param session HttpSession object to retrieve the logged-in penguji user's information.
+     * @return String representing the redirection or view to indicate success/failure.
+     */
     @PostMapping("/bap")
     public String inputBAP(Model model, HttpSession session) {
 

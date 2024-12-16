@@ -46,16 +46,24 @@ public class PembimbingController {
     @Autowired
     private CatatanSidangRepository catatanSidangRepository;
 
-    @GetMapping("/homescreen")
-    public String homescreen(Model model, HttpSession session) {
+@GetMapping("/homescreen")
+/**
+ * Menampilkan halaman home untuk pembimbing.
+ * Atribut 'pembimbing' berisi informasi user yang sedang login.
+ */
+public String homescreen(Model model, HttpSession session) {
         String pembimbing = (String) session.getAttribute("loggedInUser");
         model.addAttribute("pembimbing", pembimbing);
         return "pembimbing/pembimbing-homescreen";
     }
 
     // Pembimbing = informasi sidang
-    @GetMapping("/informasi-sidang")
-    public String getInformasiSidang(Model model, HttpSession session) {
+@GetMapping("/informasi-sidang")
+/**
+ * Menampilkan daftar informasi sidang berdasarkan pembimbing yang sedang login.
+ * Data diambil dari informasi sidang yang terkait dengan pembimbing tertentu.
+ */
+public String getInformasiSidang(Model model, HttpSession session) {
         String nidPembimbing = (String) session.getAttribute("loggedInUser"); // NID dari session
         if (nidPembimbing == null) {
             return "redirect:/login"; // Pastikan user sudah login
@@ -67,8 +75,12 @@ public class PembimbingController {
     }
 
     // Pembimbing = list drop down mahasiswa di input-nilai-sidang
-    @GetMapping("/input-nilai-sidang")
-    public String getInputNilaiSidang(Model model) {
+@GetMapping("/input-nilai-sidang")
+/**
+ * Menampilkan halaman input nilai sidang untuk mahasiswa tertentu.
+ * Mahasiswa ditampilkan dalam daftar drop-down.
+ */
+public String getInputNilaiSidang(Model model) {
         Optional<List<NpmMahasiswaPair>> pair = infoTugasAkhirService.findPair();
         if (pair.isPresent() && !pair.get().isEmpty()) {
             model.addAttribute("pair", pair.get());
@@ -76,9 +88,13 @@ public class PembimbingController {
         return "pembimbing/input-nilai-sidang";
     }
 
-    @PostMapping("/input-nilai-sidang")
-    @ResponseBody
-    public Map<String, String> postInputNilaiSidang(
+@PostMapping("/input-nilai-sidang")
+@ResponseBody
+/**
+ * Menyimpan nilai sidang yang diberikan oleh pembimbing.
+ * Validasi dilakukan untuk memastikan nilai belum dimasukkan sebelumnya.
+ */
+public Map<String, String> postInputNilaiSidang(
             @RequestParam("npm") String npm,
             @RequestParam Map<String, String> nilaiInputs,
             HttpSession session) {
@@ -124,8 +140,12 @@ public class PembimbingController {
     }
 
     // Pembimbing = list drop down mahasiswa di bap
-    @GetMapping("/bap")
-    public String getBap(Model model, HttpSession session) {
+@GetMapping("/bap")
+/**
+ * Menampilkan halaman BAP (Berita Acara Pembimbing) untuk mahasiswa terkait.
+ * Mahasiswa ditampilkan melalui daftar drop-down.
+ */
+public String getBap(Model model, HttpSession session) {
         Optional<List<NpmMahasiswaPair>> pair = infoTugasAkhirService.findPair();
         if (pair.isPresent()&&!pair.get().isEmpty()) {
             model.addAttribute("pair", pair.get());
@@ -134,8 +154,12 @@ public class PembimbingController {
     }
 
     // Catatan TA
-    @GetMapping("/catatan-ta")
-    public String getCatatanTa(Model model, HttpSession session) {
+@GetMapping("/catatan-ta")
+/**
+ * Menampilkan halaman catatan tugas akhir (TA) untuk mahasiswa terkait.
+ * Mahasiswa ditampilkan dalam daftar drop-down.
+ */
+public String getCatatanTa(Model model, HttpSession session) {
         Optional<List<NpmMahasiswaPair>> pair = infoTugasAkhirService.findPair();
         if (pair.isPresent()&&!pair.get().isEmpty()) {
             model.addAttribute("pair", pair.get());
@@ -167,8 +191,12 @@ public class PembimbingController {
     //     }
     // }
 
-    @GetMapping("/get-info-ta")
-    public ResponseEntity<?> getInfoTugasAkhir(@RequestParam("npm") String npm, HttpSession session) {
+@GetMapping("/get-info-ta")
+/**
+ * Mengambil informasi tugas akhir (TA) berdasarkan NPM mahasiswa.
+ * Hanya pembimbing yang login dapat melihat data ini.
+ */
+public ResponseEntity<?> getInfoTugasAkhir(@RequestParam("npm") String npm, HttpSession session) {
         try {
             InfoTugasAkhir infoTugasAkhir = infoTugasAkhirService.findByNpm(npm);
 
@@ -240,8 +268,12 @@ public class PembimbingController {
     // }
 
     // Database Catatan TA Baru - Catatan 1 Bisa
-    @PostMapping("/catatan-ta")
-    public ResponseEntity<?> submitCatatanSidang(@RequestBody CatatanSidang catatan, HttpSession session) {
+@PostMapping("/catatan-ta")
+/**
+ * Menyimpan catatan sidang tugas akhir (TA) untuk mahasiswa berdasarkan pembimbing yang login.
+ * Penyimpanan catatan dibatasi sesuai hak akses pembimbing.
+ */
+public ResponseEntity<?> submitCatatanSidang(@RequestBody CatatanSidang catatan, HttpSession session) {
         try {
             String loggedInNid = (String) session.getAttribute("loggedInUser");
             if (loggedInNid == null) {

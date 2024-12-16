@@ -13,6 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller untuk pengelolaan data Berita Acara Pembimbing (BAP).
+ * Menggunakan Spring MVC untuk menangani request dan respon HTTP.
+ */
 @RestController
 @RequestMapping("/bap")
 public class BAPController {
@@ -20,24 +24,17 @@ public class BAPController {
     @Autowired
     private BapService bapService;
 
-    // Dah Jalan Ini
-    // @GetMapping("/pembimbing/bap")
-    // public String showBapPage(Model model, HttpSession session) {
-    //     // Ambil NID pengguna yang login dari session
-    //     String currentUserId = (String) session.getAttribute("loggedInUser");
-
-    //     // Jika NID tidak ada di session, redirect ke halaman login
-    //     if (currentUserId == null || currentUserId.isEmpty()) {
-    //         return "redirect:/login";
-    //     }
-
-    //     model.addAttribute("currentUserId", currentUserId);
-    //     return "bap";  // Mengembalikan halaman BAP
-    // }
-
+    /**
+     * Menampilkan halaman BAP untuk pembimbing.
+     *
+     * @param npm     (optional) Nomor Pokok Mahasiswa untuk memfilter status BAP.
+     * @param model   Model untuk passing data ke view.
+     * @param session HTTP session untuk mendapatkan data pengguna yang sedang login.
+     * @return Nama view (halaman) yang akan ditampilkan, atau redirect ke halaman login jika pengguna belum login.
+     */
     @GetMapping("/pembimbing/bap")
     public String showBapPage(@RequestParam(value = "npm", required = false) String npm,
-                            Model model, HttpSession session) {
+                              Model model, HttpSession session) {
         String currentUserId = (String) session.getAttribute("loggedInUser");
         if (currentUserId == null || currentUserId.isEmpty()) {
             return "redirect:/login";
@@ -64,7 +61,13 @@ public class BAPController {
         return "pembimbing/bap";
     }
 
-
+    /**
+     * Mengunggah atau memperbarui status BAP berdasarkan NPM dan identitas pengguna.
+     *
+     * @param npm     Nomor Pokok Mahasiswa (NPM) yang akan diperbarui status BAP-nya.
+     * @param session HTTP session untuk mendapatkan data pengguna yang sedang login.
+     * @return Respon HTTP yang berisi pesan keberhasilan atau kegagalan.
+     */
     @PostMapping("/upload")
     public ResponseEntity<?> uploadBap(@RequestParam("npm") String npm, HttpSession session) {
         // Ambil currentUserId dari session
