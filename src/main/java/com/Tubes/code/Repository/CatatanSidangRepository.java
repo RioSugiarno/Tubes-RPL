@@ -15,6 +15,7 @@ public class CatatanSidangRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    //coba lagi bagian ini guys
     // public int save(CatatanSidang catatan) {
     //     String sql = "INSERT INTO CatatanSidang (ID_TA, Catatan, NID_Mahasiswa, NID_Penguji) VALUES (?, ?, ?, ?)";
     //     System.out.println("Executing query: " + sql);

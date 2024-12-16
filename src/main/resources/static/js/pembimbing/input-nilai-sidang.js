@@ -1,4 +1,3 @@
-// Estimasi Belum Benar
 function updateEstimasiNilai() {
     const tataTulis = (parseFloat(document.getElementById("tataTulis").value) || 0) * 0.2;
     const kelengkapanMateri = (parseFloat(document.getElementById("kelengkapanMateri").value) || 0) * 0.2;
@@ -40,7 +39,6 @@ document.querySelectorAll("#penilaianForm input").forEach(input => {
     input.addEventListener("input", updateEstimasiNilai);
 });
 
-// Reject apabila semua field belum terisi
 function validateFormData() {
     const inputs = document.querySelectorAll("#penilaianForm input");
     for (let input of inputs) {
@@ -60,7 +58,7 @@ document.getElementById("penilaianForm").addEventListener("submit", function (ev
 
 // Submit Nilai
 document.getElementById("penilaianForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Mencegah pengiriman form default
+    event.preventDefault();
 
     const formData = new FormData(this);
     document.querySelectorAll("input[data-komponen-id]").forEach(input => {
@@ -77,7 +75,6 @@ document.getElementById("penilaianForm").addEventListener("submit", function (ev
             if (data.status === "error") {
                 alert(data.message); // Jika sudah dinilai, tampilkan pesan error
             } else {
-                // Lanjutkan pengiriman jika belum dinilai
                 fetch(this.action, {
                     method: this.method,
                     body: new URLSearchParams(formData),
@@ -94,7 +91,7 @@ document.getElementById("penilaianForm").addEventListener("submit", function (ev
                     .then(data => {
                         if (data.status === "success") {
                             alert(data.message);
-                            window.location.href = "/penguji/homescreen"; // Balik ke Homescreen setelah Input Nilai
+                            window.location.href = "/pembimbing/homescreen"; // Balik ke Homescreen setelah Input Nilai
                         } else {
                             alert("Error: " + data.message);
                         }

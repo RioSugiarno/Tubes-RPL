@@ -49,7 +49,7 @@ public class CatatanTAService {
         int rowsUpdated = jdbcTemplate.update(query,
                 currentUserId, newCatatan, // Untuk Catatan1
                 currentUserId, newCatatan, // Untuk Catatan2
-                npm                       // Untuk WHERE clause
+                npm                  
         );
 
         System.out.println("Rows updated: " + rowsUpdated);

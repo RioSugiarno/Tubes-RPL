@@ -22,7 +22,6 @@ public class PenilaianDetail {
     @Column(nullable = false, precision = 5, scale = 2)
     private BigDecimal nilai;
 
-    // Getters and Setters
     public int getIdPenilaian() {
         return idPenilaian;
     }

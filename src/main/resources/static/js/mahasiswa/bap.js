@@ -16,17 +16,10 @@ function downloadBAP() {
 function confirmUpload() {
   const fileInput = document.getElementById("upload-file");
   const file = fileInput.files[0];
-  const currentUserIdInput = document.getElementById("currentuserid"); // Hidden input for current user
-  const currentUserId = currentUserIdInput.value;
-
-  // if (!file || !currentUserId) {
-  //   alert("File dan ID pengguna wajib diisi sebelum mengunggah.");
-  //   return;
-  // }
-
+  const currentUserIdInput = document.getElementById("currentuserid");
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("npm", currentUserId); // Use currentUserId for npm
+  formData.append("npm", currentUserId);
 
   fetch("/bap/upload2", {
     method: "POST",

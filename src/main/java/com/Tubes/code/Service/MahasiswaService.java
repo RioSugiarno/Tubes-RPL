@@ -46,10 +46,10 @@ public class MahasiswaService {
     public String getNIM(String nama) {
         Optional<Mahasiswa> mahasiswa = mahasiswaRepository.findNIMByNama(nama);
         if (mahasiswa.isPresent()) {
-            System.out.println("Ditemukan NIM: " + mahasiswa.get().getNIM()); // Debug log
+            System.out.println("Ditemukan NIM: " + mahasiswa.get().getNIM());
             return mahasiswa.get().getNIM();
         }
-        System.out.println("NIM tidak ditemukan untuk nama: " + nama); // Debug log
+        System.out.println("NIM tidak ditemukan untuk nama: " + nama);
         return null;
     }
 }

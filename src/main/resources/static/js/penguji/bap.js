@@ -1,5 +1,5 @@
 function goBack() {
-    window.history.back(); // Navigasi ke halaman sebelumnya
+    window.history.back();
   }
   
   function showDownloadModal() {

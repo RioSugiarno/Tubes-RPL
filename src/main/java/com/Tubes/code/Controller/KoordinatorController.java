@@ -21,8 +21,6 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/koordinator")
 public class KoordinatorController {
-    // @Autowired
-    // private KomponenNilaiService komponenNilaiService;
     @Autowired
     private InfoTugasAkhirService infoTugasAkhirService;
 

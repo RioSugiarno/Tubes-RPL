@@ -44,6 +44,7 @@ public class PenilaianDetailServiceTest {
     @BeforeEach
     void setUp() {
         // Mock data PenilaianDetail
+        //Menggunakan nid dari Pembimbing dan Penguji
         penilaianDetails = Arrays.asList(
             new PenilaianDetail(1, 100, 1, "7182201002", BigDecimal.valueOf(53)),
             new PenilaianDetail(2, 100, 2, "7182201002", BigDecimal.valueOf(57)),
@@ -51,7 +52,7 @@ public class PenilaianDetailServiceTest {
             new PenilaianDetail(4, 100, 7, "7182201003", BigDecimal.valueOf(87))
         );
 
-        // Mock bobot komponen
+        // Mock bobot komponen nilai untuk setiap kriteria penilaian
         when(komponenNilaiRepository.findBobotByIdNilai(1)).thenReturn(BigDecimal.valueOf(20));
         when(komponenNilaiRepository.findBobotByIdNilai(2)).thenReturn(BigDecimal.valueOf(20));
         when(komponenNilaiRepository.findBobotByIdNilai(6)).thenReturn(BigDecimal.valueOf(25));
@@ -62,17 +63,17 @@ public class PenilaianDetailServiceTest {
 
     @Test
     void testUpdateTotalScore() {
-        // Call method to test
+        // Memanggil method untuk testing
         penilaianDetailService.updateTotalScore(100);
 
-        // Verify the correct total calculation
-        double expectedTotal = (53 * 0.2 + 57 * 0.2 + 77 * 0.25 + 87 * 0.25) / 4; // Evaluator average
+        // Proses verifikasi apakah total kalkulasinya benar atau tidak
+        double expectedTotal = (53 * 0.2 + 57 * 0.2 + 77 * 0.25 + 87 * 0.25) / 4;
         NilaiTotal nilaiTotal = new NilaiTotal();
         nilaiTotal.setIdTa(100);
         nilaiTotal.setTotal(BigDecimal.valueOf(expectedTotal));
         nilaiTotal.setLastUpdated(LocalDateTime.now());
 
-        // Verify saveOrUpdate called
+        // Melakukan Verifikasi method saveOrUpdate
         verify(nilaiTotalRepository, times(1)).saveOrUpdate(argThat(total -> 
             total.getIdTa() == 100 &&
             total.getTotal().doubleValue() == expectedTotal

@@ -19,8 +19,8 @@ function submitNotes() {
             const payload = {
                 idTa: data.idTa,
                 nidMahasiswa: npm,
-                catatan1: null, // Default null
-                catatan2: null  // Default null
+                catatan1: null,
+                catatan2: null
             };
 
             // Tentukan catatan untuk pembimbing login
@@ -47,7 +47,7 @@ function submitNotes() {
         .then(result => {
             console.log("Respon server:", result);
             alert("Catatan berhasil disimpan.");
-            document.getElementById("sidang-notes").value = ""; // Reset textarea
+            document.getElementById("sidang-notes").value = "";
         })
         .catch(error => {
             console.error("Kesalahan:", error);

@@ -20,17 +20,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- <tr th:each="sidang : ${sidangList}" 
-                    th:data-penguji1="${sidang.nid_penguji1}" 
-                    th:data-penguji2="${sidang.nid_penguji2}" 
-                    th:data-pembimbing1="${sidang.nid_pembimbing1}" 
-                    th:data-pembimbing2="${sidang.nid_pembimbing2}"
-                    onclick="showDetail(this)">
-                    <td th:text="${sidang.npm}"></td>
-                    <td th:text="${sidang.judul}"></td>
-                    <td th:text="${sidang.tanggal} + ' ' + ${sidang.waktu}"></td>
-                    <td th:text="${sidang.tempat}"></td>
-                </tr> -->
                 <tr th:each="sidang : ${sidangList}" 
                     th:data-nama-penguji1="${sidang['namaPenguji1']}" 
                     th:data-nama-penguji2="${sidang['namaPenguji2']}" 

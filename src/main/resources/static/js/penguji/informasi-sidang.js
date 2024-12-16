@@ -9,13 +9,9 @@ function closePopup() {
 }
 
 function showDetail(row) {
-    // Ambil data NPM dan Nama Mahasiswa dari cell pertama (dengan asumsi format "NPM - Nama")
-    const npmNama = row.cells[0].textContent; // Contoh: "12345678 - John Doe"
-
-    // Split NPM dan Nama jika diperlukan
+    // Ambil data NPM dan Nama Mahasiswa
+    const npmNama = row.cells[0].textContent;
     const [npm, namaMahasiswa] = npmNama.split(' - ');
-
-    // Buat konten detail popup
     const detailContent = `
         <div>NPM</div><div>:</div><div>${npm || 'Tidak ada'}</div>
         <div>Nama Mahasiswa</div><div>:</div><div>${namaMahasiswa || 'Tidak ada'}</div>
@@ -27,10 +23,6 @@ function showDetail(row) {
         <div>Pembimbing 1</div><div>:</div><div>${row.dataset.namaPembimbing1 || 'Tidak ada'}</div>
         <div>Pembimbing 2</div><div>:</div><div>${row.dataset.namaPembimbing2 || 'Tidak ada'}</div>
     `;
-
-    // Masukkan konten ke dalam elemen popup
     document.getElementById('detailJadwal').innerHTML = detailContent;
-
-    // Tampilkan popup
     showPopup();
 }

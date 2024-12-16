@@ -201,23 +201,7 @@ public class PembimbingController {
         }
     }
 
-    // @PostMapping("/catatan-ta")
-    // public ResponseEntity<?> submitCatatanSidang(@RequestBody CatatanSidang catatan) {
-    //     try {
-    //         // Simpan catatan ke database
-    //         int rowsAffected = catatanSidangRepository.save(catatan);
-
-    //         if (rowsAffected > 0) {
-    //             return ResponseEntity.ok("Catatan sidang berhasil disimpan.");
-    //         } else {
-    //             return ResponseEntity.status(500).body("Gagal menyimpan catatan.");
-    //         }
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //         return ResponseEntity.status(500).body("Terjadi kesalahan saat menyimpan catatan.");
-    //     }
-    // }
-
+    //Coba lagi ini
     // @PostMapping("/catatan-ta")
     // public ResponseEntity<?> submitCatatanSidang(@RequestBody CatatanSidang catatan) {
     //     try {

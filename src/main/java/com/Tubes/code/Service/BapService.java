@@ -14,7 +14,6 @@ public class BapService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    // Pembimbing, Koordinator, Penguji Jalan
     // public void updateBapStatus(String npm, String currentUserId) {
     //     String query = """
     //             UPDATE bap

@@ -164,9 +164,6 @@ public class InfoTugasAkhirService {
         }
     }
 
-    // public List<InfoTugasAkhir> getSidangByPenguji(String nidPenguji) {
-    //     return infoTugasAkhirRepository.findSidangByPenguji(nidPenguji);
-    // }
 
     //penguji
     public List<Map<String, Object>> getSidangByPengujiWithNames(String nidPenguji) {

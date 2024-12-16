@@ -90,7 +90,7 @@ public class MahasiswaController {
             model.addAttribute("error", "Mahasiswa tidak ditemukan.");
         }
 
-        return "mahasiswa/mahasiswa-homescreen"; // Redirect ke homescreen
+        return "mahasiswa/mahasiswa-homescreen";
     }
 
     @GetMapping("/informasi-sidang")

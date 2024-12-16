@@ -1,4 +1,3 @@
-/* Global Styles */
 body {
     margin: 0;
     padding: 0;
@@ -139,7 +138,6 @@ select {
 }
 
 
-/* Modal buttons */
 .modal-buttons a,
 .modal-buttons button {
     display: inline-block;
@@ -181,7 +179,6 @@ select {
     border: 1px solid black;
 }
 
-/* Style for the back button */
 .back-button {
     position: absolute;
     top: 20px;
