@@ -1,0 +1,38 @@
+~ Login yang Digunakan :
+note : Login menggunakan username dan password dari setiap user,
+	 : Npm dan Nama digunakan ketika input sidang atau jadwal oleh Koordinator.
+
+1. Koordinator
+- clestari
+- password3
+
+
+2. Penguji
+- epratama
+- password5
+
+- jpurnomo
+- password10
+
+
+3. Pembimbing
+- gsaputra
+- password7
+
+- lwulandari
+- password12
+
+
+4. Mahasiswa
+- 6182201001
+- Ahmad Ridwan
+- aridwan
+- password1
+
+Nama Pembimbing :
+- Gilang Saputra
+- Lestari Wulandari
+
+Nama Penguji :
+- Eka Pratama
+- Joko Purnomo
